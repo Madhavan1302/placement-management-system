@@ -38,5 +38,35 @@ const applyToCompany = async (req, res) => {
         res.status(500).json({message:error.message});
     }
 }
+const getApplicantsByCompany = async (req,res) =>{
+    try{
+        const {companyId} = req.params;
+        const applications = await Application.find({company:companyId}).populate("student").populate("company");
+        res.status(200).json(applications);
+    }
+    catch(error){
+        res.status(500).json({message:error.message});
+    }
+}
+const updateApplicationStatus = async (req,res) =>{
+    try{
+        const {applicationId} = req.params;
+        const {status} = req.body;
+        const validStatuses = ["shortlisted","rejected","selected"];
+        if(!validStatuses.includes(status)){
+            return res.status(400).json({message:"Invalid status"});
+        }
+        const application = await Application.findById(applicationId);
+        if(!application){
+            return res.status(404).json({message:"Application not found"});
+        }
+        application.status = status;
+        await application.save();
+        res.status(200).json({message:"Application status updated successfully",application});
+    }
+    catch(error){
+        res.status(500).json({message:error.message});
+    }
+}
 
-module.exports = {applyToCompany};
+module.exports = {applyToCompany,getApplicantsByCompany,updateApplicationStatus};
