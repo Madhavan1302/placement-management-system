@@ -4,11 +4,15 @@ import Register from "../pages/Register";
 import StudentDashboard from "../pages/StudentDashboard";
 import AdminDashboard from "../pages/AdminDashboard";
 import ProtectedRoute from "./ProtectedRoute";
+import Landing from "../pages/Landing";
+
+
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
