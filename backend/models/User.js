@@ -19,8 +19,17 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "student", "recruiter"],
-      default: "student"
+      enum: ["admin", "recruiter", "student"],
+      default: "student",
+    },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+      // Only for Recruiter role
+    },
+    college: {
+      type: String, // College name/ID
+      required: function () { return this.role === 'student' || this.role === 'admin'; }
     }
   },
   { timestamps: true }
