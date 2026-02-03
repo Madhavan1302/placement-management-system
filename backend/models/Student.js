@@ -5,31 +5,24 @@ const studentSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
-    },
-    regNo: {
-      type: String,
       required: true,
-      unique: true
+      unique: true,
     },
-    branch: {
-      type: String,
-      required: true
-    },
-    cgpa: {
-      type: Number,
-      required: true,
-      min: 0,
-      max: 10
-    },
+    regNo: String,
+    branch: String,
+    cgpa: Number,
     skills: [String],
-    resumeUrl: {
-      type: String
+    batch: {
+      type: String, // e.g. "2025"
+      required: true
     },
-    placed: {
-      type: Boolean,
-      default: false
-    }
+    resumeUrl: String,
+
+    // 👇 OPTIONAL PROFILE PHOTO
+    profilePhoto: {
+      type: String, // store image URL
+      default: "",  // empty means no photo uploaded
+    },
   },
   { timestamps: true }
 );

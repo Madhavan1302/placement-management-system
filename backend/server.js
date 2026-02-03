@@ -12,13 +12,17 @@ const protectedRoutes = require("./routes/protectedRoutes");
 const companyRoutes = require("./routes/companyRoutes");
 const studentRoutes = require("./routes/studentRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/protected", protectedRoutes);
 app.use("/api/students", studentRoutes);
-app.use("/api/companies", companyRoutes);
-app.use("/api/applications", applicationRoutes);
+app.use("/api/companies", require("./routes/companyRoutes"));
+app.use("/api/jobs", require("./routes/jobRoutes"));
+app.use("/api/applications", require("./routes/applicationRoutes"));
+app.use("/api/stats", require("./routes/statsRoutes")); // Added stats routes
+app.use("/api/admin", adminRoutes);
 app.get("/", (req, res) => {
   res.send("Placement Management System API running");
 });

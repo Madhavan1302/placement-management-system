@@ -6,24 +6,14 @@ const companySchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    role: {
-      type: String,
-      required: true
+    website: {
+      type: String
     },
-    minCgpa: {
-      type: Number,
-      required: true
+    location: {
+      type: String
     },
-    allowedBranches: {
-      type: [String],
-      required: true
-    },
-    package: {
-      type: Number,
-      required: true
-    },
-    driveDate: {
-      type: Date
+    description: {
+      type: String
     }
   },
   { timestamps: true }

@@ -6,19 +6,23 @@ const applicationSchema = new mongoose.Schema({
         ref: 'Student',
         required: true
     },
-    company: {
+    job: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Company', 
+        ref: 'Job',
         required: true
     },
     status: {
         type: String,
         enum: ['applied', 'shortlisted', 'rejected', 'selected'],
         default: 'applied'
+    },
+    atsScore: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true });
 applicationSchema.index(
-  { student: 1, company: 1 },
-  { unique: true }
+    { student: 1, job: 1 },
+    { unique: true }
 );
 module.exports = mongoose.model('Application', applicationSchema);
